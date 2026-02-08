@@ -10,12 +10,12 @@ import java.util.Map;
 
 public class CarritoControlador {
     @RestController
-    public class CarritoControlador {
+    public class carritoControlador {
         private final Map<Integer, Carrito> carritos = new HashMap<>();
 
         @GetMapping("/api/carrito")
         public Collection<Carrito> getCarritos() {
-        return carritos.values();
+            return carritos.values();
         }
 
         @PostMapping("/api/carrito")
@@ -24,6 +24,29 @@ public class CarritoControlador {
             carritos.put(carrito.getIdCarrito(), carrito);
             return carrito;
         }
+
+        @GetMapping("/api/carrito/{idCarrito}")
+        public Carrito getCarrito(@PathVariable int idCarrito) {
+            return carritos.get(idCarrito);
+
+        }
+
+        @DeleteMapping("/api/carrito/{idCarrito}")
+        public Carrito borrarCarrito(@PathVariable int idCarrito) {
+            carritos.remove(idCarrito);
+            return null;
+        }
+
+        @PutMapping("/api/carrito/{idCarrito}")
+        public Carrito modificaCarrito(@PathVariable int idCarrito, @RequestBody Carrito carrito) {
+            carritos.put(idCarrito, carrito);
+            return carrito;
+
+        }
+    }
+}
+
+
 
 
 //
@@ -38,5 +61,4 @@ public class CarritoControlador {
 //        }
 //    }
 
-}
 
